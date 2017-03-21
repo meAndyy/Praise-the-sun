@@ -44,11 +44,13 @@ class BibliographieController extends Controller
     {
         // extract 'name' parameter from POST data
         $name = $request->request->get('name');
+        $date = $request->request->get('date');
+        $info = $request->request->get('info');
 
-        if(empty($name)){
+        if(empty($name)||empty($date)){
             $this->addFlash(
                 'error',
-                'student name cannot be an empty string'
+                'Please fill all fields'
             );
 
             // forward this to the createAction() method
@@ -56,16 +58,18 @@ class BibliographieController extends Controller
         }
 
         // forward this to the createAction() method
-        return $this->createAction($name);
+        return $this->createAction($name,$date,$info);
     }
 
          /**
      * @Route("/bibliographies/create/{name}")
      */
-    public function createAction($name)
+    public function createAction($name,$date,$info)
     {
         $bibliographie = new Bibliographie();
         $bibliographie->setName($name);
+        $bibliographie->setPublishDate($date);
+        $bibliographie->setInfo($info);
 
         // entity manager
         $em = $this->getDoctrine()->getManager();

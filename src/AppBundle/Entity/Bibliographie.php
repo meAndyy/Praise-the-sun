@@ -28,12 +28,12 @@ class Bibliographie
      */
     private $info;
 
-    public function __construct($id, $name, $date, $info){
-            $this->id = $id;
-            $this->name = $name;
-            $this->date = $date;
-            $this->info = $info;
-        }
+   // public function __construct($id, $name){
+          //  $this->id = $id;
+           // $this->name = $name;
+           // $this->date = $date;
+            //$this->info = $info;
+       // }
 
 
     /**

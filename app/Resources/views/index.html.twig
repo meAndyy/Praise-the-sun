@@ -1,0 +1,29 @@
+{% extends '_base.html.twig' %}
+    {% block pageTitle %}home page{% endblock %}
+
+    {% block body %}
+        <h1>welcome to home page</h1>
+        <ul>
+            <li>
+                <a href="{{ path('homepage') }}">back page</a>
+            </li>
+             <li>
+                <a href="{{ path('bibliographies_new_form') }}">bibs</a>
+            </li>
+
+            <li>
+                <a href ="{{ path('bibliographies_list')}}">Lists</a>
+            </li>
+            <li>
+                <a href="http://symfony.com/doc/current/page_creation.html">
+                getting started (on the Symfony website)</a>
+            </li>
+        </ul>
+
+        <p>
+            I am the home page ...
+        <br>
+            my name is {{ name }}
+        </p>
+        {{dump()}}
+    {% endblock %}

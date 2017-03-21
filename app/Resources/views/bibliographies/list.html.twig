@@ -1,0 +1,23 @@
+{% extends '_base.html.twig' %}
+
+    {% block pageTitle %}list of students{% endblock %}
+
+    {% block body %}
+
+        {{ dump() }}
+
+        <ul>
+            {% for bibliographie in bibliographies %}
+                <li>
+                    id = {{ bibliographie.id }}
+                    <br>
+                    name = {{ bibliographie.name }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+        <a href="{{ path('bibliographies_new_form')}}">
+            create NEW bibliographie
+        </a>
+    {% endblock %}

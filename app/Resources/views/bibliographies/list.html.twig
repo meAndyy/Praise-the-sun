@@ -4,7 +4,7 @@
 
     {% block body %}
 
-        {{ dump() }}
+      
 
         <ul>
             {% for bibliographie in bibliographies %}
@@ -16,6 +16,10 @@
                     Publish date: {{bibliographie.publishDate}}
                     <br>
                     Information: {{bibliographie.info}}
+
+                    <a href="{{ path('bibliographies_basket_add', {'id': bibliographie.id})}}">
+            Add to basket
+        </a>
                 </li>
             {% endfor %}
         </ul>
@@ -24,4 +28,5 @@
         <a href="{{ path('bibliographies_new_form')}}">
             create NEW bibliographie
         </a>
+          {{ dump() }}
     {% endblock %}

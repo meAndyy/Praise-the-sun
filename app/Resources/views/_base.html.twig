@@ -17,6 +17,19 @@
             {% block stylesheets %}{% endblock %}
         </head>
         <body>
+             {% set user = app.session.get('user') %}
+
+             {% if user is null %}
+             <p>
+            you are not logged in: <a href="{{ path('login') }}">login</a>
+            </p>
+    {% else %}
+        <header>
+            You are logged in as: <strong>{{ user.username }}</strong>
+            <br>
+            <a href="{{ path('logout') }}">logout</a>
+        </header>
+    {% endif %}
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -36,7 +49,7 @@
                     <li><a href="{{ path('bibliographies_basket_index')}}">Basket</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{{ path('user_new')}}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
                 </div>

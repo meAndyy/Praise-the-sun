@@ -4,8 +4,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Bibliographie;
 use AppBundle\BibliographieRepository;
+
 
 class BibliographieController extends Controller
 {
@@ -30,11 +33,35 @@ class BibliographieController extends Controller
      */
     public function newFormAction(Request $request)
     {
+       // create a task and give it some dummy data for this example
+        $bibliographie = new Bibliographie();
+
+        $form = $this->createFormBuilder($bibliographie)
+            ->add('name', TextType::class)
+            ->add('PublishDate', TextType::class)
+            ->add('Info', TextType::class)
+            ->add('save', SubmitType::class, array('label' => 'Create Bibliographie'))
+            ->getForm();
+
+            $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $bibliographie = $form->getData();
+            $name = $bibliographie->getName();
+            $date = $bibliographie->getPublishDate();
+            $info = $bibliographie->getInfo();
+
+            return $this->createAction($bibliographie);
+        }
+
+
         $argsArray = [
+            'form' => $form->createView(),
         ];
 
         $templateName = 'bibliographies/new';
         return $this->render($templateName . '.html.twig', $argsArray);
+       
     }
 
     /**
@@ -62,14 +89,11 @@ class BibliographieController extends Controller
     }
 
          /**
-     * @Route("/bibliographies/create/{name}")
+     * @Route("/bibliographies/create/{name}/{date}/{info}")
      */
-    public function createAction($name,$date,$info)
+    public function createAction(Bibliographie $bibliographie)
     {
-        $bibliographie = new Bibliographie();
-        $bibliographie->setName($name);
-        $bibliographie->setPublishDate($date);
-        $bibliographie->setInfo($info);
+        
 
         // entity manager
         $em = $this->getDoctrine()->getManager();
@@ -80,7 +104,7 @@ class BibliographieController extends Controller
         // actually executes the queries (i.e. the INSERT query)
         $em->flush();
 
-        return new Response('Created new bibliographie with id '.$bibliographie->getId());
+        return $this->redirectToRoute('bibliographies_list');
     }
 
     /**

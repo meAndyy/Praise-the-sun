@@ -9,9 +9,13 @@
         <ul>
             {% for bibliographie in bibliographies %}
                 <li>
-                    id = {{ bibliographie.id }}
+                    id: {{ bibliographie.id }}
                     <br>
-                    name = {{ bibliographie.name }}
+                    name: {{ bibliographie.name }}
+                    <br>
+                    Publish date: {{bibliographie.publishDate}}
+                    <br>
+                    Information: {{bibliographie.info}}
                 </li>
             {% endfor %}
         </ul>

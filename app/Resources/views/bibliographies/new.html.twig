@@ -3,24 +3,10 @@
 
     {% block body %}
 
-        <h1>Create new bibliographie</h1>
+    <h1>Create new bibliographie</h1>
 
-        {% for flash_message in app.session.flashBag.get('error') %}
-            <div class="flash-error">
-                {{ flash_message }}
-            </div>
-        {% endfor %}
+   {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
 
-        <form action="{{ path("bibliographies_process_new_form") }}" method="POST">
-            Name:
-            <input type="text" name="name">
-            <p>
-            Publish date:
-            <input type="text" name="date">
-            <p>
-            Info:
-            <input type="text" name="info">
-            <p>
-            <input type="submit" value="Create new bibliographie">
-        </form>
     {% endblock %}

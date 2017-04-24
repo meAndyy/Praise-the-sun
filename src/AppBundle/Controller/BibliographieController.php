@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Bibliographie;
 use AppBundle\BibliographieRepository;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 class BibliographieController extends Controller
 {
@@ -30,6 +32,7 @@ class BibliographieController extends Controller
 
      /**
      * @Route("/bibliographies/new", name="bibliographies_new_form")
+     * 
      */
     public function newFormAction(Request $request)
     {

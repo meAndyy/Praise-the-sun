@@ -9,13 +9,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends Controller
 {
-	/**
+    /**
      * login form
      *
      * @Route("/login", name="login")
      * @Method({"GET", "POST"})
      */
-     public function loginAction(Request $request)
+    public function loginAction(Request $request)
     {
         $session = new Session();
         $user = new User();
@@ -42,11 +42,9 @@ class SecurityController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ];
-        $templateName = 'login';
+        $templateName = 'security/login';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
-
-
     private function createrLoginForm(User $user)
     {
         return $this->createForm('AppBundle\Form\UserType', $user);
@@ -79,5 +77,3 @@ class SecurityController extends Controller
         return ('admin' == $username) && ('admin' == $password);
     }
 }
-        
-
